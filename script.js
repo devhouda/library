@@ -5,27 +5,21 @@ const newBookBtn = document.querySelector(".new-btn");
 
 // const myLibrary = [];
 const myLibrary = [
-  {
-    id: crypto.randomUUID(),
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald",
-    pages: 180,
-    read: "read",
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "1984",
-    author: "George Orwell",
-    pages: 328,
-    read: "not read yet",
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "The Hobbit",
-    author: "J.R.R. Tolkien",
-    pages: 295,
-    read: "not read yet",
-  },
+  new Book(
+    crypto.randomUUID(),
+    "The Great Gatsby",
+    "F. Scott Fitzgerald",
+    180,
+    "read",
+  ),
+  new Book(crypto.randomUUID(), "1984", "George Orwell", 328, "not read yet"),
+  new Book(
+    crypto.randomUUID(),
+    "The Hobbit",
+    "J.R.R. Tolkien",
+    295,
+    "not read yet",
+  ),
 ];
 
 function Book(id, title, author, pages, read) {
@@ -38,6 +32,10 @@ function Book(id, title, author, pages, read) {
     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
   };
 }
+
+Book.prototype.toggleStatus = function () {
+  return `${this.read === "read" ? (this.read = "not read yet") : (this.read = "read")}`;
+};
 
 function addBookToLibrary(title, author, pages, read) {
   const id = crypto.randomUUID();
@@ -65,7 +63,11 @@ function displayBooks() {
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("remove");
     removeBtn.textContent = "Remove";
+    const toggleBtn = document.createElement("button");
+    toggleBtn.classList.add("toggle");
+    toggleBtn.textContent = "Toggle Status";
     removeTd.appendChild(removeBtn);
+    removeTd.appendChild(toggleBtn);
     newBook.appendChild(title);
     newBook.appendChild(author);
     newBook.appendChild(pages);
@@ -130,6 +132,17 @@ books.addEventListener("click", (e) => {
 
     if (index !== -1) {
       myLibrary.splice(index, 1);
+      displayBooks();
+    }
+  }
+  if (e.target.classList.contains("toggle")) {
+    const row = e.target.closest("tr");
+    const id = row.dataset.id;
+
+    const index = myLibrary.findIndex((book) => book.id === id);
+
+    if (index !== -1) {
+      myLibrary[index].toggleStatus();
       displayBooks();
     }
   }

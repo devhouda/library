@@ -79,3 +79,18 @@ form button {
   background-color: white;
   border: 1px solid rgb(255, 52, 52)
 }
+
+.toggle {
+  background-color: rgb(1, 202, 1);
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.toggle:hover {
+  color: rgb(1, 202, 1);
+  background-color: white;
+  border: 1px solid rgb(1, 202, 1)
+}
