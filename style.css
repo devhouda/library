@@ -65,3 +65,17 @@ form button {
   margin-top: 8px;
   border-radius: 4px;
 }
+
+.remove {
+  background-color: rgb(255, 52, 52);
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.remove:hover {
+  color: rgb(255, 52, 52);
+  background-color: white;
+  border: 1px solid rgb(255, 52, 52)
+}

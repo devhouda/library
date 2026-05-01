@@ -6,18 +6,21 @@ const newBookBtn = document.querySelector(".new-btn");
 // const myLibrary = [];
 const myLibrary = [
   {
+    id: crypto.randomUUID(),
     title: "The Great Gatsby",
     author: "F. Scott Fitzgerald",
     pages: 180,
     read: "read",
   },
   {
+    id: crypto.randomUUID(),
     title: "1984",
     author: "George Orwell",
     pages: 328,
     read: "not read yet",
   },
   {
+    id: crypto.randomUUID(),
     title: "The Hobbit",
     author: "J.R.R. Tolkien",
     pages: 295,
@@ -47,8 +50,9 @@ function addBookToLibrary(title, author, pages, read) {
 
 function displayBooks() {
   books.innerHTML = ""; // 🧠 clear table first
-  myLibrary.map((book) => {
+  myLibrary.forEach((book) => {
     const newBook = document.createElement("tr");
+    newBook.setAttribute("data-id", book.id);
     const title = document.createElement("td");
     title.textContent = book.title;
     const author = document.createElement("td");
@@ -57,10 +61,16 @@ function displayBooks() {
     pages.textContent = book.pages;
     const read = document.createElement("td");
     read.textContent = book.read;
+    const removeTd = document.createElement("td");
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("remove");
+    removeBtn.textContent = "Remove";
+    removeTd.appendChild(removeBtn);
     newBook.appendChild(title);
     newBook.appendChild(author);
     newBook.appendChild(pages);
     newBook.appendChild(read);
+    newBook.appendChild(removeTd);
     books.appendChild(newBook);
   });
 }
@@ -110,3 +120,17 @@ newBookBtn.addEventListener("click", () => {
 });
 
 displayBooks();
+
+books.addEventListener("click", (e) => {
+  if (e.target.classList.contains("remove")) {
+    const row = e.target.closest("tr");
+    const id = row.dataset.id;
+
+    const index = myLibrary.findIndex((book) => book.id === id);
+
+    if (index !== -1) {
+      myLibrary.splice(index, 1);
+      displayBooks();
+    }
+  }
+});
