@@ -1,0 +1,67 @@
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  text-align: center;
+}
+
+table {
+  margin: 8px auto;
+  border: 1px solid pink;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid pink;
+}
+
+form button,
+.new-btn {
+  background-color: rgb(255, 173, 187);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.new-btn {
+  padding: 8px;
+  border-radius: 18px;
+}
+
+form button:hover,
+.new-btn:hover {
+  background-color: white;
+  color: rgb(255, 173, 187);
+}
+
+form {
+  margin: 8px auto;
+  width: 661px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+form input {
+  width: 80%;
+  padding: 12px;
+  border: 1px solid rgb(255, 173, 187);
+  color: black;
+  font-size: 16px;
+}
+
+form input:focus-visible {
+  border: 3px solid rgb(255, 158, 174);
+}
+
+form button {
+  width: 30%;
+  padding: 8px;
+  margin-top: 8px;
+  border-radius: 4px;
+}
