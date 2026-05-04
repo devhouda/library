@@ -3,7 +3,20 @@ const table = document.querySelector("table");
 const container = document.querySelector(".container");
 const newBookBtn = document.querySelector(".new-btn");
 
-// const myLibrary = [];
+class Book {
+  constructor(id, title, author, pages, read) {
+    this.id = id;
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
+  }
+}
+
 const myLibrary = [
   new Book(
     crypto.randomUUID(),
@@ -22,17 +35,6 @@ const myLibrary = [
   ),
 ];
 
-function Book(id, title, author, pages, read) {
-  this.id = id;
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.info = function () {
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-  };
-}
-
 Book.prototype.toggleStatus = function () {
   return `${this.read === "read" ? (this.read = "not read yet") : (this.read = "read")}`;
 };
@@ -42,9 +44,6 @@ function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(id, title, author, pages, read);
   myLibrary.push(newBook);
 }
-
-// const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, "not read yet");
-// console.log(theHobbit.info());
 
 function displayBooks() {
   books.innerHTML = ""; // 🧠 clear table first
